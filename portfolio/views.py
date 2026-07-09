@@ -1,14 +1,24 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Project, PersonalInformation
+from django.shortcuts import render
+from .models import Portfolio, PersonalInformation
 
 def project_list(request):
-    projects = Project.objects.all()
-    return render(request, 'project_list.html', {'projects': projects})
+
+    all_projects = Portfolio.objects.all()
+
+    personal_info = PersonalInformation.objects.first()
+    
+    context = {
+        'projects': all_projects,
+        'personal_info': personal_info,
+    }
+    return render(request, 'home.html', context)
 
 def project_detail(request, pk):
-    project = get_object_or_404(Project, pk=pk)
-    return render(request, 'project_detail.html', {'project': project})
-
-def personal_info(request):
-    info = PersonalInformation.objects.first()
-    return render(request, 'personal_info.html', {'info': info})
+    single_project = Portfolio.objects.get(pk=pk)
+    my_info = PersonalInformation.objects.first()
+    
+    context = {
+        'project': single_project,
+        'personal_info': my_info,
+    }
+    return render(request, 'portfolio/project_detail.html', context)

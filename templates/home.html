@@ -1,14 +1,9 @@
-<html>
-    <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    </head>
-    </body>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Andrew Bagaporo - Portfolio</title>
+  <title>{% if personal_info %}{{ personal_info.name }}{% else %}Andrew Bagaporo{% endif %} - Portfolio</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
@@ -34,7 +29,6 @@
       padding: 60px 20px;
     }
 
-
     header {
       position: fixed;
       top: 0;
@@ -52,14 +46,12 @@
     .nav-link.active {
       border-bottom: 2px solid #f77f00;
     }
-
    
     .cover-container {
       padding-top: 90px;
       max-width: 900px;
       margin: 0 auto;
     }
-
  
     #home {
       display: flex;
@@ -79,8 +71,7 @@
       margin-top: 10px;
       color: #f77f00;
     }
-
-  
+ 
     .highlight-box {
       background-color: #1b263b;
       border: 1px solid #00b4d8;
@@ -88,6 +79,15 @@
       margin: 10px;
       border-radius: 8px;
       color: #ffffff;
+    }
+
+    .project-link-item {
+      padding: 8px 0;
+      border-bottom: 1px dashed #1b263b;
+    }
+    
+    .project-link-item:last-child {
+      border-bottom: none;
     }
   </style>
 </head>
@@ -107,61 +107,78 @@
   <div class="cover-container">
 
     <main id="home">
-      <h1>Andrew Bagaporo</h1>
-      <p>Aspiring Engineer & Developer</p>
+  <h1>
+    {% if personal_info %}
+      {{ personal_info.first_name }} {{ personal_info.last_name }}
+    {% else %}
+      Andrew Bagaporo
+    {% endif %}
+  </h1>
+  
+  <p>
+    {% if personal_info %}
+      {{ personal_info.summary }}
+    {% else %}
+      aspiring engineer and developer
+    {% endif %}
+  </p>
 
-      <div class="d-flex justify-content-center flex-wrap mt-4">
-        <div class="highlight-box">Experience: DevC++</div>
-        <div class="highlight-box">Status: Open for Opportunities</div>
-        <div class="highlight-box">GitHub Projects: Coming Soon</div>
-      </div>
-    </main>
-
-<section id="skills">
-  <div class="container text-center">
-
-    <div class="highlight-box mb-5">
-      <h2 style="font-size:2.5rem;">Skills</h2>
-    </div>
-
-    <div class="d-flex flex-wrap justify-content-center">
-
-      <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
-        <p>💻 <strong>Programming:</strong><br>
-          Experience using DevC++
-        </p>
-      </div>
-
-    </div>
+  <div class="d-flex justify-content-center flex-wrap mt-4">
+    <div class="highlight-box">Experience: DevC++</div>
+    <div class="highlight-box">Status: Open for Opportunities</div>
+    <div class="highlight-box">GitHub Projects: Loaded Live</div>
   </div>
-</section>
+</main>
 
-<section id="projects">
-  <div class="container text-center">
-
-    <div class="highlight-box mb-5">
-      <h2 style="font-size:2.5rem;">Projects</h2>
-    </div>
-
-    <div class="d-flex flex-wrap justify-content-center">
-
-      <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
-        <p>📂 <strong>Future Projects:</strong><br>
-          Coming soon...
-        </p>
+    <section id="skills">
+      <div class="container text-center">
+        <div class="highlight-box mb-5">
+          <h2 style="font-size:2.5rem;">Skills</h2>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center">
+          <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
+            <p>💻 <strong>Programming:</strong><br>
+              Experience using DevC++
+            </p>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
-        <p>🚀 <strong>Status:</strong><br>
-          Open for collaborations
-        </p>
-      </div>
+    <section id="projects">
+      <div class="container text-center">
+        <div class="highlight-box mb-5">
+          <h2 style="font-size:2.5rem;">Projects</h2>
+        </div>
 
-    </div>
+        <div class="d-flex flex-wrap justify-content-center">
+  <div class="highlight-box m-3 p-4" style="min-width:320px; font-size:1.3rem;">
+    <p>📁 <strong>Projects:</strong></p>
+    <ul style="list-style:none; padding:0;">
+      {% for project in projects %}
+        <li class="project-link-item">
+          <a href="{% url 'project_detail' project.pk %}">
+            {{ project.project_name }}
+          </a>
+        </li>
+      {% empty %}
+        <li class="project-link-item"><a href="/projects/3/">Project S</a></li>
+        <li class="project-link-item"><a href="/projects/2/">Project I</a></li>
+        <li class="project-link-item"><a href="/projects/1/">Project F</a></li>
+      {% endfor %}
+    </ul>
   </div>
-</section>
+</div>
+          <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
+            <p>🚀 <strong>Status:</strong><br>
+              Open for collaborations
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section id="contact">
+    <section id="contact">
   <div class="container text-center">
 
     <div class="highlight-box mb-5">
@@ -172,13 +189,25 @@
 
       <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
         <p>✉️ <strong>Email:</strong><br>
-          <a href="mailto:rlbagaporo@student.hau.edu.ph">rlbagaporo@student.hau.edu.ph</a>
+          <a href="mailto:{% if personal_info %}{{ personal_info.email }}{% else %}rlbagaporo@student.hau.edu.ph{% endif %}">
+            {% if personal_info %}{{ personal_info.email }}{% else %}rlbagaporo@student.hau.edu.ph{% endif %}
+          </a>
         </p>
       </div>
 
       <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
         <p>📞 <strong>Number:</strong><br>
-          <a href="tel:09989262212">09989262212</a>
+          <a href="tel:{% if personal_info %}{{ personal_info.contact_number }}{% else %}09989262212{% endif %}">
+            {% if personal_info %}{{ personal_info.contact_number }}{% else %}09989262212{% endif %}
+          </a>
+        </p>
+      </div>
+
+      <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
+        <p>📍 <strong>Address:</strong><br>
+          <span style="color: #00b4d8;">
+            {% if personal_info %}{{ personal_info.address }}{% else %}San Fernando, Pampanga{% endif %}
+          </span>
         </p>
       </div>
 
@@ -191,6 +220,8 @@
     </div>
   </div>
 </section>
+
+  </div>
 
   <script>
     const sections = document.querySelectorAll("section, main");
@@ -209,12 +240,12 @@
       navLinks.forEach(link => {
         link.classList.remove("active");
         if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("add");
           link.classList.add("active");
         }
       });
     });
   </script>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
