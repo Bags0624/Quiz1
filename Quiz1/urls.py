@@ -17,13 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from portfolio import views as portfolio_views
-from testimonies import views as testimony_views
+from testimonies.views import TestimonyListView, testimony_detail, testimony_create_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', portfolio_views.project_list, name='homepage'), 
     path('projects/', portfolio_views.project_list, name='project_list'),
     path('projects/<int:pk>/', portfolio_views.project_detail, name='project_detail'),
-    path('testimonies/', testimony_views.testimony_list, name='testimony_list'),
-    path('testimonies/<int:pk>/', testimony_views.testimony_detail, name='testimony_detail'),
+
+    # 🔹 Testimonies routes
+    path('testimonies/', TestimonyListView.as_view(), name='testimony_list'),
+    path('testimonies/<int:pk>/', testimony_detail, name='testimony_detail'),
+    path('testimonies/create/', testimony_create_view, name='testimony_create'),
 ]

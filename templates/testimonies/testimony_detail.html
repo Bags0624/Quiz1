@@ -4,20 +4,24 @@
     <title>Testimony Detail</title>
     <style>
         body { background-color: #0d0d1a; font-family: Arial, sans-serif; color: #fff; }
-        .container { width: 60%; margin: auto; padding: 20px; }
-        h1 { color: #00aaff; }
-        .field { margin-bottom: 15px; }
-        .label { font-weight: bold; color: #ff6600; }
+        .container { width: 60%; margin: auto; }
+        .author { font-weight: bold; color: #ff6600; margin-bottom: 10px; }
+        .project { color: #00aaff; margin-bottom: 15px; }
+        .content { color: #fff; margin-bottom: 15px; }
+        .contact { color: #ffcc00; margin-bottom: 15px; font-style: italic; }
+        .date { font-size: 0.85em; color: #aaa; margin-bottom: 20px; }
+        .back-link { color: #00aaff; text-decoration: none; font-weight: bold; }
+        .back-link:hover { color: #ff6600; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Testimony Detail</h1>
-        <div class="field"><span class="label">Author:</span> {{ testimony.author }}</div>
-        <div class="field"><span class="label">Project:</span> {{ testimony.project }}</div>
-        <div class="field"><span class="label">Contact:</span> {{ testimony.contact }}</div>
-        <div class="field"><span class="label">Date:</span> {{ testimony.created_at|date:"M d, Y" }}</div>
-        <div class="field"><span class="label">Content:</span> {{ testimony.content }}</div>
+        <p class="author">{{ testimony.author }}</p>
+        <p class="project">{{ testimony.project }}</p>
+        <p class="content">{{ testimony.content }}</p>
+        <p class="contact">Contact: {{ testimony.contact }}</p>
+        <p class="date">{{ testimony.created_at|date:"M d, Y" }}</p>
+        <a href="{% url 'testimony_list' %}" class="back-link">← Back to Testimonials</a>
     </div>
 </body>
 </html>
