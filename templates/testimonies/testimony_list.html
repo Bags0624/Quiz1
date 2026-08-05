@@ -1,0 +1,13 @@
+<h1>TESTIMONIALS</h1>
+<button class="button">+ Leave Testimony</button>
+
+{% for t in testimonies %}
+    <div class="testimony">
+        <p class="author">{{ t.author }}</p>
+        <p class="date">{{ t.created_at|date:"M d, Y" }}</p>
+        <p>{{ t.content }}</p>
+        <button class="view-btn">View Detail</button>
+    </div>
+{% empty %}
+    <p>No testimonies yet.</p>
+{% endfor %}
