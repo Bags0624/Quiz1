@@ -25,7 +25,6 @@ urlpatterns = [
     path('projects/', portfolio_views.project_list, name='project_list'),
     path('projects/<int:pk>/', portfolio_views.project_detail, name='project_detail'),
 
-    # 🔹 Testimonies routes
     path('testimonies/', TestimonyListView.as_view(), name='testimony_list'),
     path('testimonies/<int:pk>/', testimony_detail, name='testimony_detail'),
     path('testimonies/create/', testimony_create_view, name='testimony_create'),
