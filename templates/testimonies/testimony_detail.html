@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Testimony Detail</title>
+    <style>
+        body { background-color: #0d0d1a; font-family: Arial, sans-serif; color: #fff; }
+        .container { width: 60%; margin: auto; padding: 20px; }
+        h1 { color: #00aaff; }
+        .field { margin-bottom: 15px; }
+        .label { font-weight: bold; color: #ff6600; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Testimony Detail</h1>
+        <div class="field"><span class="label">Author:</span> {{ testimony.author }}</div>
+        <div class="field"><span class="label">Project:</span> {{ testimony.project }}</div>
+        <div class="field"><span class="label">Contact:</span> {{ testimony.contact }}</div>
+        <div class="field"><span class="label">Date:</span> {{ testimony.created_at|date:"M d, Y" }}</div>
+        <div class="field"><span class="label">Content:</span> {{ testimony.content }}</div>
+    </div>
+</body>
+</html>

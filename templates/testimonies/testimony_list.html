@@ -1,13 +1,60 @@
-<h1>TESTIMONIALS</h1>
-<button class="button">+ Leave Testimony</button>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Testimonials</title>
+    <style>
+        body { background-color: #0d0d1a; font-family: Arial, sans-serif; color: #fff; }
+        h1 { text-align: center; color: #00aaff; }
+        .container { width: 60%; margin: auto; }
+        .testimony {
+            background: #1e1e2f;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #00aaff;
+            position: relative; /* allows button positioning */
+        }
+        .author {
+            font-weight: bold;
+            color: #ff6600;
+            margin-bottom: 10px;
+        }
+        .content {
+            color: #fff;
+        }
+        .date {
+            font-size: 0.85em;
+            color: #aaa;
+            margin-top: 10px;
+        }
+        .view-btn {
+            background: #00aaff;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TESTIMONIALS</h1>
 
-{% for t in testimonies %}
-    <div class="testimony">
-        <p class="author">{{ t.author }}</p>
-        <p class="date">{{ t.created_at|date:"M d, Y" }}</p>
-        <p>{{ t.content }}</p>
-        <button class="view-btn">View Detail</button>
+        {% for t in testimonies %}
+            <div class="testimony">
+                <p class="author">{{ t.author }}</p>
+                <p class="content">{{ t.content }}</p>
+                <p class="date">{{ t.created_at|date:"M d, Y" }}</p>
+                <a href="{% url 'testimony_detail' t.pk %}" class="view-btn">View Testimony</a>
+            </div>
+        {% empty %}
+            <p>No testimonies yet.</p>
+        {% endfor %}
     </div>
-{% empty %}
-    <p>No testimonies yet.</p>
-{% endfor %}
+</body>
+</html>

@@ -89,6 +89,19 @@
     .project-link-item:last-child {
       border-bottom: none;
     }
+    .nav-btn {
+    background: #00aaff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 10px;
+}
+    .nav-btn:hover {
+    background: #ff6600;
+}
+
   </style>
 </head>
 <body>
@@ -100,6 +113,7 @@
         <a class="nav-link fw-bold" href="#skills">Skills</a>
         <a class="nav-link fw-bold" href="#projects">Projects</a>
         <a class="nav-link fw-bold" href="#contact">Contact</a>
+        <a class="nav-link fw-bold" href="{% url 'testimony_list' %}">Testimonials</a>
       </nav>
     </div>
   </header>
