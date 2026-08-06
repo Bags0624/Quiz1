@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if personal_info %}{{ personal_info.name }}{% else %}Andrew Bagaporo{% endif %} - Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0d1b2a;
+      color: #ffffff;
+      margin: 0;
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+      text-align: center;
+    }
+    a { color: #00b4d8; text-decoration: none; }
+    a:hover { color: #f77f00; }
+    section { min-height: 100vh; padding: 60px 20px; }
+    header { position: fixed; top: 0; width: 100%; z-index: 1000; background-color: #0d1b2a; padding: 10px 0; }
+    .nav-link { color: #00b4d8 !important; margin: 0 15px; }
+    .nav-link.active { border-bottom: 2px solid #f77f00; }
+    .cover-container { padding-top: 90px; max-width: 900px; margin: 0 auto; }
+    #home { display: flex; justify-content: center; align-items: center; flex-direction: column; }
+    #home h1 { font-size: 3.5rem; font-weight: bold; color: #00b4d8; }
+    #home p { font-size: 1.2rem; margin-top: 10px; color: #f77f00; }
+    .highlight-box { background-color: #1b263b; border: 1px solid #00b4d8; padding: 20px; margin: 10px; border-radius: 8px; color: #ffffff; }
+    .project-link-item { padding: 8px 0; border-bottom: 1px dashed #1b263b; }
+    .project-link-item:last-child { border-bottom: none; }
+    .nav-btn { background: #00aaff; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-left: 10px; }
+    .nav-btn:hover { background: #ff6600; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="d-flex justify-content-center align-items-center">
+      <nav class="nav nav-masthead">
+        <a class="nav-link fw-bold active" href="#home">Home</a>
+        <a class="nav-link fw-bold" href="#skills">Skills</a>
+        <a class="nav-link fw-bold" href="#projects">Projects</a>
+        <a class="nav-link fw-bold" href="#contact">Contact</a>
+        <a class="nav-link fw-bold" href="{% url 'testimony_list' %}">Testimonials</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="cover-container">
+
+    <main id="home">
+      <h1>
+        {% if personal_info %}
+          {{ personal_info.first_name }} {{ personal_info.last_name }}
+        {% else %}
+          Andrew Bagaporo
+        {% endif %}
+      </h1>
+      <p>
+        {% if personal_info %}
+          {{ personal_info.summary }}
+        {% else %}
+          aspiring engineer and developer
+        {% endif %}
+      </p>
+      <div class="d-flex justify-content-center flex-wrap mt-4">
+        <div class="highlight-box">Experience: DevC++</div>
+        <div class="highlight-box">Status: Open for Opportunities</div>
+        <div class="highlight-box">GitHub Projects: Loaded Live</div>
+      </div>
+    </main>
+    
+    <section id="skills">
+      <div class="container text-center">
+        <div class="highlight-box mb-5">
+          <h2 style="font-size:2.5rem;">Skills</h2>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center">
+          <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
+            <p>💻 <strong>Programming:</strong><br> Experience using DevC++</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section id="projects">
+  <div class="container text-center">
+    <div class="highlight-box mb-5">
+      <h2 style="font-size:2.5rem;">Projects</h2>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center">
+      <div class="highlight-box m-3 p-4" style="min-width:320px; font-size:1.3rem;">
+        <p>📁 <strong>Projects:</strong></p>
+        <ul style="list-style:none; padding:0;">
+          <!-- 🚫 Do not show dynamic projects here -->
+          <!-- ✅ Keep only your static placeholders -->
+          <li class="project-link-item"><a href="/projects/3/">Project S</a></li>
+          <li class="project-link-item"><a href="/projects/2/">Project I</a></li>
+          <li class="project-link-item"><a href="/projects/1/">Project F</a></li>
+        </ul>
+      </div>
+      <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
+        <p>🚀 <strong>Status:</strong><br> Open for collaborations</p>
+      </div>
+    </div>
+
+    <!-- 🚀 Centerized rectangle under Projects -->
+    <div class="d-flex justify-content-center mt-4">
+      <div class="highlight-box p-4" style="max-width:500px; font-size:1.2rem;">
+        <h5 style="color:#00b4d8;">🚀 Got a project in mind?</h5>
+        <p style="color:#f77f00;">Let’s build it.</p>
+        <a href="{% url 'project_create' %}" class="btn btn-info w-100 fw-bold">
+          Start Building
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <section id="contact">
+      <div class="container text-center">
+        <div class="highlight-box mb-5">
+          <h2 style="font-size:2.5rem;">Contact</h2>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center">
+          <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
+            <p>✉️ <strong>Email:</strong><br>
+              <a href="mailto:{% if personal_info %}{{ personal_info.email }}{% else %}rlbagaporo@student.hau.edu.ph{% endif %}">
+                {% if personal_info %}{{ personal_info.email }}{% else %}rlbagaporo@student.hau.edu.ph{% endif %}
+              </a>
+            </p>
+          </div>
+          <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
+            <p>📞 <strong>Number:</strong><br>
+              <a href="tel:{% if personal_info %}{{ personal_info.contact_number }}{% else %}09989262212{% endif %}">
+                {% if personal_info %}{{ personal_info.contact_number }}{% else %}09989262212{% endif %}
+              </a>
+            </p>
+          </div>
+          <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
+            <p>📍 <strong>Address:</strong><br>
+              <span style="color: #00b4d8;">
+                {% if personal_info %}{{ personal_info.address }}{% else %}San Fernando, Pampanga{% endif %}
+              </span>
+            </p>
+          </div>
+          <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
+            <p>💻 <strong>GitHub:</strong><br>
+              <a href="https://github.com/Bags0624" target="_blank">github.com/Bags0624</a>
+            </p>
+          </div>
+          <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
+            <a href="{% url 'inquiry_create' %}" class="btn btn-info w-100 fw-bold">Inquire</a>
+          </div>
+        </div>
+      </div>
+    </section>
