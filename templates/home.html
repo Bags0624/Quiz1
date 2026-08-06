@@ -68,7 +68,7 @@
         <div class="highlight-box">GitHub Projects: Loaded Live</div>
       </div>
     </main>
-
+    
     <section id="skills">
       <div class="container text-center">
         <div class="highlight-box mb-5">
@@ -82,32 +82,40 @@
       </div>
     </section>
 
-    <section id="projects">
-      <div class="container text-center">
-        <div class="highlight-box mb-5">
-          <h2 style="font-size:2.5rem;">Projects</h2>
-        </div>
-        <div class="d-flex flex-wrap justify-content-center">
-          <div class="highlight-box m-3 p-4" style="min-width:320px; font-size:1.3rem;">
-            <p>📁 <strong>Projects:</strong></p>
-            <ul style="list-style:none; padding:0;">
-              {% for project in projects %}
-                <li class="project-link-item">
-                  <a href="{% url 'project_detail' project.pk %}">{{ project.project_name }}</a>
-                </li>
-              {% empty %}
-                <li class="project-link-item"><a href="/projects/3/">Project S</a></li>
-                <li class="project-link-item"><a href="/projects/2/">Project I</a></li>
-                <li class="project-link-item"><a href="/projects/1/">Project F</a></li>
-              {% endfor %}
-            </ul>
-          </div>
-          <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
-            <p>🚀 <strong>Status:</strong><br> Open for collaborations</p>
-          </div>
-        </div>
+<section id="projects">
+  <div class="container text-center">
+    <div class="highlight-box mb-5">
+      <h2 style="font-size:2.5rem;">Projects</h2>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center">
+      <div class="highlight-box m-3 p-4" style="min-width:320px; font-size:1.3rem;">
+        <p>📁 <strong>Projects:</strong></p>
+        <ul style="list-style:none; padding:0;">
+          <!-- 🚫 Do not show dynamic projects here -->
+          <!-- ✅ Keep only your static placeholders -->
+          <li class="project-link-item"><a href="/projects/3/">Project S</a></li>
+          <li class="project-link-item"><a href="/projects/2/">Project I</a></li>
+          <li class="project-link-item"><a href="/projects/1/">Project F</a></li>
+        </ul>
       </div>
-    </section>
+      <div class="highlight-box m-3 p-4" style="min-width:280px; font-size:1.3rem;">
+        <p>🚀 <strong>Status:</strong><br> Open for collaborations</p>
+      </div>
+    </div>
+
+    <!-- 🚀 Centerized rectangle under Projects -->
+    <div class="d-flex justify-content-center mt-4">
+      <div class="highlight-box p-4" style="max-width:500px; font-size:1.2rem;">
+        <h5 style="color:#00b4d8;">🚀 Got a project in mind?</h5>
+        <p style="color:#f77f00;">Let’s build it.</p>
+        <a href="{% url 'project_create' %}" class="btn btn-info w-100 fw-bold">
+          Start Building
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <section id="contact">
       <div class="container text-center">
@@ -147,28 +155,3 @@
         </div>
       </div>
     </section>
-
-  </div>
-
-  <script>
-  const sections = document.querySelectorAll("section, main");
-  const navLinks = document.querySelectorAll(".nav-link");
-
-  window.addEventListener("scroll", () => {
-    let current = "";
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 100;
-      const sectionHeight = section.clientHeight;
-      if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
-        current = section.getAttribute("id");
-      }
-    });
-
-    navLinks.forEach(link => {
-      link.classList.remove("active");
-      if (link.getAttribute("href") === "#" + current) {
-        link.classList.add("active");
-      }
-    });
-  });
-</script>

@@ -7,7 +7,7 @@ class TestimonyListView(ListView):
     model = Testimony
     template_name = 'testimonies/testimony_list.html'
     context_object_name = 'testimonies'
-    ordering = ['-created_at']
+    ordering = ['-id']
 
 def testimony_detail(request, pk):
     testimony = get_object_or_404(Testimony, pk=pk)
