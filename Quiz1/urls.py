@@ -18,14 +18,15 @@ from django.contrib import admin
 from django.urls import path
 from portfolio import views as portfolio_views
 from testimonies.views import TestimonyListView, testimony_detail, testimony_create_view
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', portfolio_views.project_list, name='homepage'), 
     path('projects/', portfolio_views.project_list, name='project_list'),
     path('projects/<int:pk>/', portfolio_views.project_detail, name='project_detail'),
-
     path('testimonies/', TestimonyListView.as_view(), name='testimony_list'),
     path('testimonies/<int:pk>/', testimony_detail, name='testimony_detail'),
     path('testimonies/create/', testimony_create_view, name='testimony_create'),
+    path('contact/', include('contact.urls')),
 ]
